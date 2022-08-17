@@ -11,8 +11,8 @@ const Product = () => {
     }
     const allProducts = products.map(({title, id, price, category, image, description}: any) => {
         return (
-            <Link to={`/product-details/${id}`}>
-                <div className="flex flex-col justify-between bg-white w-auto h-96 shadow-md rounded-md px-2 py-2 my-2" key={id}>
+            <Link to={`/product-details/${id}`} key={id}>
+                <div className="flex flex-col justify-between bg-white w-auto h-96 shadow-md rounded-md px-2 py-2 my-2">
                     <div className="image h-52">
                         <img src={image} alt={description} style={imageStyle}></img>
                     </div>
