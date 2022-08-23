@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { selectedProduct } from "./redux/actions/productActions";
+import { addToCart, selectedProduct } from "./redux/actions/productActions";
 
 const ProductDetail = () => {
     const { productId } = useParams();
@@ -22,6 +22,10 @@ const ProductDetail = () => {
         dispatch(selectedProduct({}));
     }, [dispatch, productId]);
 
+    const handleOnClick = () => {
+        dispatch(addToCart(product));
+    };
+
     return (
         <>
             {!show ? (<span className="text-xl">Loading</span>) : 
@@ -35,7 +39,7 @@ const ProductDetail = () => {
                         <div className="my-2 py-1 px-6 bg-green-400 text-white w-fit rounded">${product?.price}</div>
                         <div className="my-2 bg-gray-200 pl-2 py-2 text-gray-700">{product?.category}</div>
                         <p className="text-sm text-gray-500 pb-3">{product?.description}</p>
-                        <button className="py-2 px-8 text-white text-sm bg-rose-600 rounded">Add to Cart</button>
+                        <button className="py-2 px-8 text-white text-sm bg-rose-600 rounded" onClick={handleOnClick}>Add to Cart</button>
                     </div>
                 </div>
             </div>)}
