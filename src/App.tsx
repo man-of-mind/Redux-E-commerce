@@ -7,7 +7,7 @@ import ProductListing from './components/productListing';
 function App() {
   return (
     <div className="App">
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <Navbar />
         <Routes>
           <Route path="/" element={<ProductListing/>} />
