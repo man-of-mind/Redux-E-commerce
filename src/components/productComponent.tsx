@@ -15,11 +15,13 @@ const Product = () => {
     const allProducts = products.map((product: any) => {
         const {title, id, price, category, image, description} = product
         return (
-            <Link to={`/product-details/${id}`} key={id}>
+            <div key={id}>
                 <div className="flex flex-col justify-between bg-white w-auto h-96 shadow-md rounded-md px-2 py-2 my-2">
+                    <Link to={`/product-details/${id}`}>
                     <div className="image h-52">
                         <img src={image} alt={description} style={imageStyle}></img>
                     </div>
+                    </Link>
                     <div className="flex flex-col pt-6">
                         <span>{title}</span>
                         <span className="font-bold">${price}</span>
@@ -29,7 +31,7 @@ const Product = () => {
                         </div>
                     </div>
                 </div>
-            </Link>
+            </div>
         );
     });
 
