@@ -22,18 +22,33 @@ const Checkout = () => {
         );
     });
 
-    const displayCartProduct = checkoutList.map(item => {
-        return <Product 
-            count={item.count} 
-            key={item.id} 
-            description={item.product.description} 
-            image={item.product.image} />
+    const uniqueCheckOutList = Array.from(new Set(checkoutList.map(a => a.id))).map(id => {
+        return checkoutList.find(a => a.id === id)
     })
+
+    const displayCartProduct = uniqueCheckOutList.map(item => {
+        return <Product 
+            count={item?.count} 
+            key={item?.id} 
+            description={item?.product.description} 
+            image={item?.product.image} />
+    });
+    
+    let totalProduct = 0;
+    uniqueCheckOutList.map(item => totalProduct += item?.count || 0)
     
     return (
         <div>
             <h1 className='text-3xl'>CheckList</h1>
-            {displayCartProduct}
+            <>{uniqueCheckOutList.length !== 0 ? (
+                <>
+                    {displayCartProduct}
+                    <h1 className='pt-4 font-bold text-md'>Total Products in Cart: {totalProduct}</h1>
+                </>
+            ) : (
+                <h1 className='text-3xl font-italic'>No product in cart!!!</h1>
+            )} 
+            </>
         </div>
     );
 }
@@ -42,7 +57,7 @@ const Product = ({count, description, image}: any) => {
     return (
         <div className='rounded shadow-xl w-4/5 h-24 flex items-center justify-between p-2'>
             <img src={image} alt={description} width={48} height={48}/>
-            <span>Quantities: {count}</span>
+            <span>Number: {count}</span>
         </div>
     );
 }
